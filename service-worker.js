@@ -1,4 +1,4 @@
-maconst cacheName = "site-cache-v1";
+const cacheName = "site-cache-v1";
 const resourcesToPrecache = [
     "/",
     "index.html"
@@ -20,6 +20,6 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
     event.respondWith(async () => {
-        const response = await caches.match(event.request) || await fetch(event.request);
+        return await caches.match(event.request) || await fetch(event.request);
     });
 });
