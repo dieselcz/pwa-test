@@ -1,4 +1,4 @@
-const cacheName = "static-shell-v1";
+maconst cacheName = "site-cache-v1";
 const resourcesToPrecache = [
     "/",
     "index.html"
@@ -19,7 +19,7 @@ self.addEventListener("activate", event => {
 });
 
 self.addEventListener("fetch", event => {
-    event.respondWith(
-        caches.match(event.request) || fetch(event.request)
-    );
+    event.respondWith(async () => {
+        const response = await caches.match(event.request) || await fetch(event.request);
+    });
 });
