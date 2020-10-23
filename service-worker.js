@@ -19,7 +19,14 @@ self.addEventListener("activate", event => {
 });
 
 self.addEventListener("fetch", event => {
-    event.respondWith(async () => {
-        return await caches.match(event.request) || await fetch(event.request);
-    });
+    // event.respondWith(async () => {
+    //     return await caches.match(event.request) || await fetch(event.request);
+    // });
+
+    event.respondWith(
+        caches.match(event.request)
+            .then(response => {
+                return response || fetch(event.request);
+            })
+    );
 });
