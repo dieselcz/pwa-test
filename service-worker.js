@@ -23,10 +23,8 @@ self.addEventListener("fetch", event => {
     //     return await caches.match(event.request) || await fetch(event.request);
     // });
 
-    event.respondWith(
-        caches.match(event.request)
-            .then(response => {
-                return response || fetch(event.request);
-            })
-    );
+    event.respondWith(async () => {
+        const cachedResponse = await caches.match(event.request);
+        return cachedResponse || await fetch(event.request);
+    });
 });
