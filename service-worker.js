@@ -26,3 +26,16 @@ self.addEventListener("fetch", event => {
             })
     );
 });
+
+self.addEventListener("push", event => {
+    const title = "New message arrived!";
+    const message = {
+        body: "We have received a push message.",
+        //icon: "",
+        tag: "simple-tag"
+    };
+
+    event.waitUntil(
+        self.registration.showNotification(title, message)
+    );
+});
